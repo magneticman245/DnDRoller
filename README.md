@@ -6,6 +6,8 @@ Written in Python 3.8.2
 
 Author: Dan Mott
 
+
+
 HOW DOES IT WORK?
 
 This program takes input of the form NdS, where N is the number of dice to roll, and S is the size of the dice. It interprets the user input using a regular expression, and generates a random number from 1 to the value of S. This is done N times, and the total of all 'rolls' is displayed.
@@ -32,7 +34,29 @@ For example, the following two inputs are interpreted exactly the same way:
 
 If no valid roll is detected, the program will print an error message reminding the user of how to format their input.
 
+
+
+NEW FEATURE (LATEST COMMIT)
+
+Add modifiers to rolls. To do this, append your input with a plus (+) or minus (-) followed by the value to add or subtract. The program will detect this and add or subtract from the total roll.
+
+This is useful for making ability checks or rolling damage, as you can add appropriate modifiers when you roll, and see straight away what your result is. For example, see the input:
+
+    2d6+2
+
+This could produce the following output:
+
+    Rolling 2d6...
+
+    Roll 1: 4
+
+    Roll 2: 1
+
+    TOTAL (+2): 7
+
 To close the program, simply type 'exit'.
+
+
 
 LIMITATIONS
 
@@ -60,14 +84,13 @@ which would output something like this:
     
     TOTAL: 14
 
-Also planned is the inclusion of modifiers to rolls. These are integer values that are added or subtracted to the total roll. For example:
+
+The Regex used to interpret the input cannot cope with whitespace in the input field. This in particular is noticeable when modifying the roll, as one may be tempted to type 2d6 +2, rather than 2d6+2. At the moment, the first of those options will not be detected by the Regex. 
+
+In the future, the plan is to make the Regex more forgiving with regards to whitespace, and extraneous explanation, in the input, so any of the following would be accepted identically:
 
     2d6+2
-    
-would produce output:
-
-    Roll 1: 4
-    
-    Roll 2: 2
-    
-    TOTAL(+2): 8
+    2d6 +2
+    2d6 + 2
+    2 d6+ 2
+    2 d6 and +2
